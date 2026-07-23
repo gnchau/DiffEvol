@@ -124,25 +124,11 @@ MY_VIRUS = DatasetConfig(
 results = run_pipeline(my_records, min_coverage=10)
 ```
 
-## Figures
-
-`generate_fig3bc` writes two heatmaps sharing one variant ordering, so rows
-correspond between them:
-
-- **3B** — genotype frequency over time
-- **3C** — the DiffEvol constraint matrix over the same genotypes and window
-
-`generate_fig4` writes a six-panel comparison of frequency against constraint:
-mean + standard deviation, entropy, rate of change, variance, Gini coefficient,
-and the top-*n* genotype trajectories.
-
-Figures are written to `figures/` by default.
-
 ### Parameters worth attention
 
 | Parameter | Notes |
 |---|---|
-| `min_coverage` | Minimum observations per genotype. The single biggest lever on runtime: `W` is `G × G` and the eigendecomposition is `O(G³)`. Start high. |
+| `min_coverage` | Minimum observations per genotype. The single biggest lever on runtime: `W` is `G × G` and the eigendecomposition is `O(G³)`.|
 | `mutation_rate` | Per-site rate for `W`. `1e-5` in the paper. |
 | `normalization` | `"column"` normalizes per time point; `"double"` also normalizes each genotype's profile across time, making rare genotypes visible at the cost of comparable magnitudes. |
 | `vmax_freq` / `vmax_constraint` | Color ceilings. `vmax_constraint=None` uses the 99th percentile of nonzero values. Set both equal to compare panels directly. |
