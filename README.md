@@ -159,18 +159,6 @@ day, so gaps in sampling are not represented as gaps in `t`. Since `Wᵗ` treats
 `t` as elapsed diffusion time, irregular sampling will distort the inferred
 constraint; aggregate to a regular grid beforehand if your sampling is uneven.
 
-## Tests
-
-```bash
-pip install -e ".[dev]"
-pytest
-```
-
-The tests run the pipeline end to end on synthetic sequences and check the
-mathematical invariants — `W` row-stochastic, rows of `K` summing to one. They
-do not check numerical agreement with the published figures, which requires the
-GISAID data.
-
 ## Repository layout
 
 ```
