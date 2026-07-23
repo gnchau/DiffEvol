@@ -1,0 +1,31 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+
+.venv/
+venv/
+.env
+
+# Data — GISAID terms prohibit redistribution
+data/*
+!data/README.md
+*.fasta
+*.fa
+*.xls
+*.xlsx
+*.npz
+genotypes.txt
+times.txt
+
+# Generated figures
+figures/
+*.png
+*.pdf
+*.svg
+
+.ipynb_checkpoints/
+.pytest_cache/
+.DS_Store
