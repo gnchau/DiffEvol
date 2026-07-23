@@ -137,13 +137,7 @@ results = run_pipeline(my_records, min_coverage=10)
 ## Scaling
 
 The eigendecomposition of `W` dominates runtime and memory. `G` in the low
-thousands is comfortable; well beyond that, `W` alone will strain memory at 8
-bytes per entry. Control `G` with `min_coverage`.
-
-Note that `run_pipeline` builds one row per *observed* date, not per calendar
-day, so gaps in sampling are not represented as gaps in `t`. Since `Wᵗ` treats
-`t` as elapsed diffusion time, irregular sampling will distort the inferred
-constraint; aggregate to a regular grid beforehand if your sampling is uneven.
+thousands is comfortable; control `G` with `min_coverage`.
 
 ## Repository layout
 
