@@ -29,3 +29,8 @@ figures/
 .ipynb_checkpoints/
 .pytest_cache/
 .DS_Store
+figures/*.npz
+figures/*.fasta
+figures/*.xls
+figures/*.pdf
+figures/*.png
