@@ -134,6 +134,33 @@ results = run_pipeline(my_records, min_coverage=10)
 | `vmax_freq` / `vmax_constraint` | Color ceilings. `vmax_constraint=None` uses the 99th percentile of nonzero values. Set both equal to compare panels directly. |
 | `pseudocount` | Uniform mass added to `f₀`. Raise it if `K` shows extreme values in early time points. |
 
+## Reproducing the manuscript figures
+
+The scripts in `supplemental_code/` reproduce the figures in the paper. They
+are standalone and do not import the `diffevol` package.
+
+```bash
+pip install numpy scipy "matplotlib>=3.7" pandas biopython tqdm umap-learn xlrd openpyxl
+cd supplemental_code
+
+python figure1_simulation.py                     # Figure 1 (no data needed)
+python figure3_comparison.py --confirmatory      # Figure 3 + confirmatory window tests
+python figure2_heatmaps.py                       # Figure 2 (needs Figure 3's cached output)
+python figure3_comparison.py --virus flu         # Supplementary influenza A (H1N1) figure
+```
+
+| Script | Output | Input |
+|---|---|---|
+| `figure1_simulation.py` | `figure1_simulation.pdf/.png` | none (simulated) |
+| `figure3_comparison.py` | `figure3_covid_freq_vs_constraint.pdf/.png`; with `--confirmatory`, `figure3_covid_confirmatory_{vaccine,omicron}.pdf/.png` | `records_8_5M.npz` (arrays `dates`, `locations`, `sequences`), or cached `covid_filtered.npz` + `evo_results_full.npz` |
+| `figure2_heatmaps.py` | `figure2_umap_heatmaps.pdf/.png` | `covid_filtered.npz`, `evo_results_full.npz` (written by `figure3_comparison.py`) |
+| `figure3_comparison.py --virus flu` | `figureS_flu_freq_vs_constraint.pdf/.png` | `gisaid_epiflu_sequence.fasta`, `gisaid_epiflu_isolates.xls` |
+| `load_gisaid.py` | — | GISAID EpiFlu loader used by the influenza run |
+
+`figure3_comparison.py` runs the full pipeline from raw records on the first
+run and caches the results as `.npz` files; later runs load the cache. Place
+the GISAID-derived input files in `supplemental_code/` before running.
+
 ## Scaling
 
 The eigendecomposition of `W` dominates runtime and memory. `G` in the low
@@ -154,6 +181,11 @@ diffevol/
 │   └── cli.py         command-line entry point
 ├── scripts/
 │   └── run_analysis.py
+├── supplemental_code/
+│   ├── figure1_simulation.py
+│   ├── figure2_heatmaps.py
+│   ├── figure3_comparison.py
+│   └── load_gisaid.py
 ├── notebooks/
 │   └── example.ipynb
 └── tests/
